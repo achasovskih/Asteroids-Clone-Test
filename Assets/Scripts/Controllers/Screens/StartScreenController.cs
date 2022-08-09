@@ -5,19 +5,21 @@ public class StartScreenController : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
 
-    public Action OnStartScreenDestroy;
+    public Action OnDestroyStart;
+    public Action OnDestroyEnd;
 
     private void Update()
     {
         if (Input.anyKeyDown)
         {
             _animator.SetTrigger("StartFiller");
+            OnDestroyStart?.Invoke();
         }
     }
 
     private void DestroyStartScreen()
     {
-        OnStartScreenDestroy?.Invoke();
+        OnDestroyEnd?.Invoke();
         Destroy(gameObject);
     }
 }
