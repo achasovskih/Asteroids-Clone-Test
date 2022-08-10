@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class PlayerController : PlayerModel
 {
+    private GameObject _playerObject;
+
     public override GameObject SpawnPlayer(GameObject playerPrefab, Transform parent)
     {
-        GameObject player = Instantiate(playerPrefab, parent);
-        return player;
+        _playerObject = Instantiate(playerPrefab, parent);
+        return _playerObject;
     }
 
 }

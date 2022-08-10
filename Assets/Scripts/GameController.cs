@@ -12,18 +12,19 @@ public class GameController : MonoBehaviour
     [Header("Models")]
     [SerializeField] private ViewModel _viewModel;
     [SerializeField] private PlayerModel _playerModel;
+    [SerializeField] private EnemyModel _enemyModel;
 
     [Header("Canvas")]
     [SerializeField] private Canvas _targetCanvas;
 
     private GameObject _startScreenObject, _gameScreenObject;
-    private GameObject _playerObject;
 
     private void Start()
     {
         _startScreenObject = _viewModel.SetScreen(_startScreenPrefab, _targetCanvas.transform);
         _startScreenObject.GetComponent<StartScreenController>().OnDestroyStart += ChangeScreen;
         _startScreenObject.GetComponent<StartScreenController>().OnDestroyEnd += SetUpPlayer;
+        _startScreenObject.GetComponent<StartScreenController>().OnDestroyEnd += _enemyModel.StartEnemySpawn;
     }
 
     private void ChangeScreen()
@@ -34,6 +35,6 @@ public class GameController : MonoBehaviour
 
     private void SetUpPlayer()
     {
-        _playerObject = _playerModel.SpawnPlayer(_playerPrefab, transform);
+        _playerModel.SpawnPlayer(_playerPrefab, transform);
     }
 }
