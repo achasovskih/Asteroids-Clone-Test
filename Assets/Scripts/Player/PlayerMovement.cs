@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
         if (_moveDirection != 0 || _turnDirection != 0)
         {
             _rigidBody.AddForce(Vector2.up * -_moveDirection * -_moveSpeed);
+            _rigidBody.AddForce(Vector2.right * -_moveDirection * -_moveSpeed);
             _rigidBody.AddTorque(-_turnDirection * _turnSpeed);
         }
     }

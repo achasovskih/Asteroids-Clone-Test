@@ -7,12 +7,13 @@ public class GameController : MonoBehaviour
     [Header("Prefabs")]
     [SerializeField] private GameObject _startScreenPrefab;
     [SerializeField] private GameObject _gameScreenPrefab;
-    [SerializeField] private GameObject _playerPrefab;
 
     [Header("Models")]
     [SerializeField] private ViewModel _viewModel;
     [SerializeField] private PlayerModel _playerModel;
     [SerializeField] private EnemyModel _enemyModel;
+
+    [SerializeField] private GameObject _spawnedPlayer;
 
     [Header("Canvas")]
     [SerializeField] private Canvas _targetCanvas;
@@ -31,10 +32,12 @@ public class GameController : MonoBehaviour
     {
         _gameScreenObject = _viewModel.SetScreen(_gameScreenPrefab, _targetCanvas.transform);
         _gameScreenObject.transform.SetAsFirstSibling();
+        _startScreenObject.GetComponent<StartScreenController>().OnDestroyStart -= ChangeScreen;
     }
 
     private void SetUpPlayer()
     {
-        _playerModel.SpawnPlayer(_playerPrefab, transform);
+        _spawnedPlayer = _playerModel.SpawnPlayer(transform);
+        _enemyModel.player = _spawnedPlayer;
     }
 }
