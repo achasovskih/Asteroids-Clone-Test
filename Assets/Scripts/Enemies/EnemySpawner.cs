@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -25,17 +24,19 @@ public class EnemySpawner : MonoBehaviour
             int spawnChance = Random.Range(0, 11);
 
             if (spawnChance < 7)
-            {
-                Instantiate(_asteroids[Random.Range(0, _asteroids.Length)]
-                    , _enemiesSpawnPoints[Random.Range(0, _enemiesSpawnPoints.Length)]);
-            }
+                CreateEnemy(_asteroids, new Asteroid());
+
             else
-            {
-                GameObject spaceship = Instantiate(_spaceships[Random.Range(0, _spaceships.Length)],
-                    _enemiesSpawnPoints[Random.Range(0, _enemiesSpawnPoints.Length)]);
-                spaceship.GetComponent<Spaceship>().player = player;
-            }
+                CreateEnemy(_spaceships, new Spaceship());
+
             yield return new WaitForSeconds(Random.Range(0, 4));
         }
+    }
+
+    private void CreateEnemy(GameObject[] pool, BaseEnemy enemyType)
+    {
+        enemyType = Instantiate(pool[Random.Range(0, pool.Length)],
+            _enemiesSpawnPoints[Random.Range(0, _enemiesSpawnPoints.Length)]).GetComponent<BaseEnemy>();
+        enemyType.player = player;
     }
 }

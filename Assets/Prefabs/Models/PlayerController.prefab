@@ -44,5 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96bc4a23583ce7c4baf43c9987f85f72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxPlayerHp: 5
   health: 3
   playerObject: {fileID: 5625849990560434945, guid: 3c8a093875057384bb6024ea1b1b3728, type: 3}
