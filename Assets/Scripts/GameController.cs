@@ -18,26 +18,33 @@ public class GameController : MonoBehaviour
     [Header("Canvas")]
     [SerializeField] private Canvas _targetCanvas;
 
-    private GameObject _startScreenObject, _gameScreenObject;
+    private StartScreenController _startScreenObject;
+    private GameScreenController _gameScreenObject;
 
     private void Start()
     {
-        _startScreenObject = _viewModel.SetScreen(_startScreenPrefab, _targetCanvas.transform);
-        _startScreenObject.GetComponent<StartScreenController>().OnDestroyStart += ChangeScreen;
-        _startScreenObject.GetComponent<StartScreenController>().OnDestroyEnd += SetUpPlayer;
-        _startScreenObject.GetComponent<StartScreenController>().OnDestroyEnd += _enemyModel.StartEnemySpawn;
+        _startScreenObject = _viewModel.SetScreen(_startScreenPrefab, _targetCanvas.transform).GetComponent<StartScreenController>();
+        StartScreenSubsribingMethod();
     }
 
     private void ChangeScreen()
     {
-        _gameScreenObject = _viewModel.SetScreen(_gameScreenPrefab, _targetCanvas.transform);
+        _gameScreenObject = _viewModel.SetScreen(_gameScreenPrefab, _targetCanvas.transform).GetComponent<GameScreenController>();
         _gameScreenObject.transform.SetAsFirstSibling();
-        _startScreenObject.GetComponent<StartScreenController>().OnDestroyStart -= ChangeScreen;
+        _startScreenObject.OnDestroyStart -= ChangeScreen;
     }
 
     private void SetUpPlayer()
     {
         _spawnedPlayer = _playerModel.SpawnPlayer(transform);
         _enemyModel.player = _spawnedPlayer;
+        _spawnedPlayer.GetComponent<PlayerModel>().OnGetDamage += _gameScreenObject.ChangePlayerHealth;
+    }
+
+    private void StartScreenSubsribingMethod()
+    {
+        _startScreenObject.OnDestroyStart += ChangeScreen;
+        _startScreenObject.OnDestroyEnd += SetUpPlayer;
+        _startScreenObject.OnDestroyEnd += _enemyModel.StartEnemySpawn;
     }
 }
