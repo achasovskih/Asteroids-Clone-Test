@@ -6,6 +6,12 @@ public class Spaceship : MonoBehaviour
 {
     public GameObject player;
     private float _speed = 3f;
+    private float _lifeTime = 10f;
+
+    private void Start()
+    {
+        StartCoroutine(LifeTimeCoroutine(_lifeTime));
+    }
 
     private void Update()
     {
@@ -21,6 +27,12 @@ public class Spaceship : MonoBehaviour
         }
     }
 
+    private IEnumerator LifeTimeCoroutine(float lifeTime)
+    {
+        yield return new WaitForSeconds(lifeTime);
+        Destroy(gameObject);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject == player.gameObject)
@@ -28,5 +40,10 @@ public class Spaceship : MonoBehaviour
             player.GetComponent<PlayerModel>().GetDamage(1);
             Destroy(gameObject);
         }
+    }
+
+    private void OnDestroy()
+    {
+        Debug.Log("I`m died");
     }
 }

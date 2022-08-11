@@ -8,10 +8,10 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject _startScreenPrefab;
     [SerializeField] private GameObject _gameScreenPrefab;
 
-    [Header("Models")]
+    [Header("Reference scripts")]
     [SerializeField] private ViewModel _viewModel;
     [SerializeField] private PlayerModel _playerModel;
-    [SerializeField] private EnemyModel _enemyModel;
+    [SerializeField] private EnemySpawner _enemySpawner;
 
     [SerializeField] private GameObject _spawnedPlayer;
 
@@ -23,28 +23,46 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
+        SetStartScreen();
+    }
+
+    private void SetStartScreen()
+    {
         _startScreenObject = _viewModel.SetScreen(_startScreenPrefab, _targetCanvas.transform).GetComponent<StartScreenController>();
         StartScreenSubsribingMethod();
     }
 
-    private void ChangeScreen()
+    private void SetGameScreen()
     {
         _gameScreenObject = _viewModel.SetScreen(_gameScreenPrefab, _targetCanvas.transform).GetComponent<GameScreenController>();
         _gameScreenObject.transform.SetAsFirstSibling();
-        _startScreenObject.OnDestroyStart -= ChangeScreen;
+        _gameScreenObject.ChangePlayerHealth(_playerModel.maxPlayerHp);
+
+        _gameScreenObject.OnScreenDestroy += Lose;
+        _startScreenObject.OnDestroyStart -= SetGameScreen;
     }
 
     private void SetUpPlayer()
     {
         _spawnedPlayer = _playerModel.SpawnPlayer(transform);
-        _enemyModel.player = _spawnedPlayer;
+        _spawnedPlayer.GetComponent<PlayerModel>().health = _playerModel.maxPlayerHp;
+        _enemySpawner.player = _spawnedPlayer;
         _spawnedPlayer.GetComponent<PlayerModel>().OnGetDamage += _gameScreenObject.ChangePlayerHealth;
+        _spawnedPlayer.GetComponent<PlayerModel>().OnDeath += _gameScreenObject.StartLoseAnimation;
     }
 
     private void StartScreenSubsribingMethod()
     {
-        _startScreenObject.OnDestroyStart += ChangeScreen;
+        _startScreenObject.OnDestroyStart += SetGameScreen;
         _startScreenObject.OnDestroyEnd += SetUpPlayer;
-        _startScreenObject.OnDestroyEnd += _enemyModel.StartEnemySpawn;
+        _startScreenObject.OnDestroyEnd += _enemySpawner.StartEnemySpawn;
+    }
+
+    private void Lose()
+    {
+        if (_startScreenObject == null)
+        {
+            SetStartScreen();
+        }
     }
 }

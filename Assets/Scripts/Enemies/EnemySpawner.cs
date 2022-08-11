@@ -1,7 +1,8 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : EnemyModel
+public class EnemySpawner : MonoBehaviour
 {
     [Header("Spawn points")]
     [SerializeField] private Transform[] _enemiesSpawnPoints;
@@ -10,7 +11,9 @@ public class EnemySpawner : EnemyModel
     [SerializeField] private GameObject[] _spaceships;
     [SerializeField] private GameObject[] _asteroids;
 
-    public override void StartEnemySpawn()
+    public GameObject player;
+
+    public void StartEnemySpawn()
     {
         StartCoroutine(EnemySpawnCoroutine());
     }
@@ -35,10 +38,4 @@ public class EnemySpawner : EnemyModel
             yield return new WaitForSeconds(Random.Range(0, 4));
         }
     }
-}
-
-public abstract class EnemyModel : MonoBehaviour
-{
-    public GameObject player;
-    public abstract void StartEnemySpawn();
 }

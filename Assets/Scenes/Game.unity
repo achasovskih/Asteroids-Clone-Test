@@ -277,7 +277,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb03a09c1f2c82a4bb7947120bcaa027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   _enemiesSpawnPoints:
   - {fileID: 1435797913}
   - {fileID: 248208889}
@@ -299,6 +298,7 @@ MonoBehaviour:
   - {fileID: 8797350629357707539, guid: f6f8b1edf8635244eb2bd07fa4bc6198, type: 3}
   _asteroids:
   - {fileID: 801699419121432072, guid: 73f05dde777a70647b5a6653c4668860, type: 3}
+  player: {fileID: 0}
 --- !u!1 &248208888
 GameObject:
   m_ObjectHideFlags: 0
@@ -1062,10 +1062,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startScreenPrefab: {fileID: 4539469029017412299, guid: 4f99598200c79004e80fa9d9ca9bdd63, type: 3}
   _gameScreenPrefab: {fileID: 6836479491358708036, guid: 9b7e41060558ce849ac70c15e639cf1e, type: 3}
-  _playerPrefab: {fileID: 5625849990560434945, guid: 3c8a093875057384bb6024ea1b1b3728, type: 3}
   _viewModel: {fileID: 3131940479691179626, guid: 4d754aeb38b5c2e43a69c963dbbc90ef, type: 3}
   _playerModel: {fileID: 2370676971944219213, guid: fdd77db467dd3a14f81797f6a4f85d8f, type: 3}
-  _enemyModel: {fileID: 160026827}
+  _enemySpawner: {fileID: 160026827}
+  _spawnedPlayer: {fileID: 0}
   _targetCanvas: {fileID: 708751436}
 --- !u!1 &2123533659
 GameObject:

@@ -12,19 +12,30 @@ public class PlayerController : PlayerModel
 
     public override void GetDamage(int damage)
     {
-        playerObject.GetComponent<PlayerModel>().health -= damage;
-        OnGetDamage?.Invoke(playerObject.GetComponent<PlayerModel>().health);
+        int currentHealth = playerObject.GetComponent<PlayerModel>().health -= damage;
+
+        if (currentHealth < 0)
+        {
+            OnDeath?.Invoke();
+            Destroy(playerObject);
+        }
+        else
+            OnGetDamage?.Invoke(currentHealth);
     }
 
 }
 
 public abstract class PlayerModel : MonoBehaviour
 {
-    public int health = 3;
+    public int maxPlayerHp = 1;
+
+    public int health;
 
     public GameObject playerObject;
 
     public Action<int> OnGetDamage;
+
+    public Action OnDeath;
 
     public abstract GameObject SpawnPlayer(Transform parent);
 
