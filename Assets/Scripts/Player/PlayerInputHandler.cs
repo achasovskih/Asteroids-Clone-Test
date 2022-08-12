@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerInputHandler : MonoBehaviour
 {
     [SerializeField] private ShootController _shootController;
-    [SerializeField] private float _turnSpeed = 0.1f, _moveSpeed = 1f, _turnDirection = 0f; 
+    [SerializeField] private float _turnSpeed = 0.1f, _moveSpeed = 0.5f, _turnDirection = 0f; 
 
     private Rigidbody2D _rigidBody;
     private bool _isMoving;

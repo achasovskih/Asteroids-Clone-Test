@@ -143,9 +143,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a7d4f2a751b3546b9e05ef7be00610, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _turnSpeed: 0.1
-  _moveSpeed: 1
   _shootController: {fileID: 4839075722794009039}
+  _turnSpeed: 0.1
+  _moveSpeed: 0.5
+  _turnDirection: 0
 --- !u!114 &4839075722794009039
 MonoBehaviour:
   m_ObjectHideFlags: 0
