@@ -27,9 +27,9 @@ public class PlayerController : PlayerModel
 
 public abstract class PlayerModel : MonoBehaviour
 {
-    public int maxPlayerHp = 5;
+    public int maxPlayerHp = 3;
 
-    public int health;
+    public int health = 0;
 
     public GameObject playerObject;
 

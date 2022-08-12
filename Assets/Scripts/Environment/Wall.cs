@@ -42,7 +42,7 @@ public class Wall : MonoBehaviour
 
     private IEnumerator CantTeleport()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.5f);
         _canTeleport = true;
     }
 }
