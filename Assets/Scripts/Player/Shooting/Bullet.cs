@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Класс компонента пули игрока
+/// </summary>
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D _rb;

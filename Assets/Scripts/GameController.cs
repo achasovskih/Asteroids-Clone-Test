@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+///  ласс, отвечающий за логику игры и внедр€щий зависимости обособленным друг от друга компонентам
+/// </summary>
 public class GameController : MonoBehaviour
 {
     [Header("Prefabs")]

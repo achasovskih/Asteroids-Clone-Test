@@ -2,6 +2,9 @@ using System.Collections;
 using System;
 using UnityEngine;
 
+/// <summary>
+/// Базовый класс для всех врагов
+/// </summary>
 public abstract class BaseEnemy : MonoBehaviour
 {
     public GameObject player;

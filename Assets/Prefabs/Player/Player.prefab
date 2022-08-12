@@ -144,8 +144,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shootController: {fileID: 4839075722794009039}
-  _turnSpeed: 0.1
-  _moveSpeed: 0.5
+  _turnSpeed: 0.3
+  _moveSpeed: 1
   _turnDirection: 0
 --- !u!114 &4839075722794009039
 MonoBehaviour:

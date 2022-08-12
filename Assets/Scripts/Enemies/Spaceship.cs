@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Класс, описывающий сущность врага-НЛО
+/// </summary>
 public class Spaceship : BaseEnemy
 {
     private int _spaceShipPoints = 100;

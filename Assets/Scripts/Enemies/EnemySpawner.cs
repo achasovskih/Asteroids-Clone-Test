@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+///  ласс-фабрика, отвечающий за порождение врагов
+/// </summary>
 public class EnemySpawner : MonoBehaviour
 {
     [Header("Spawn points")]

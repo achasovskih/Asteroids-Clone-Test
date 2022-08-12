@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Класс, обрабатывающий пользовательский ввод
+/// </summary>
 public class PlayerInputHandler : MonoBehaviour
 {
     [SerializeField] private ShootController _shootController;

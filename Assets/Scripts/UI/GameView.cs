@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// View-модель UI
+/// </summary>
 public class GameView : ViewModel
 {
     public override GameObject SetScreen(GameObject screen, Transform parent)

@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+/// <summary>
+/// Класс, отвечающий за игровой экран
+/// </summary>
 public class GameScreenController : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _score, _healthCount;

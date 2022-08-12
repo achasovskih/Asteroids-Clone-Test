@@ -3,6 +3,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Класс, отвечающий за основные функции игрока
+/// </summary>
 public class PlayerController : PlayerModel
 {
     public override GameObject SpawnPlayer(Transform parent)

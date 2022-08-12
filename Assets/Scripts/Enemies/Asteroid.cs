@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Класс, описывающий сущность врага-астероида
+/// </summary>
 public class Asteroid : BaseEnemy
 {
     private float _maxSize = 1f;

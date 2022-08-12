@@ -2,6 +2,9 @@ using UnityEngine;
 using TMPro;
 using System;
 
+/// <summary>
+/// Класс, отвечающий за стартовый экран
+/// </summary>
 public class StartScreenController : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _bestScore;

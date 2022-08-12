@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Класс, отвечающий за обработку столкновений объектов с границами экрана
+/// </summary>
 public class Wall : MonoBehaviour
 {
     private static bool _canTeleport = true;
