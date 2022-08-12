@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Spaceship : BaseEnemy
 {
+    private int _spaceShipPoints = 100;
     private void Start()
     {
         _speed = 3f;
@@ -24,6 +25,7 @@ public class Spaceship : BaseEnemy
 
     protected override void GetDamage()
     {
+        OnGetDamage?.Invoke(_spaceShipPoints);
         Destroy(gameObject);
     }
 }

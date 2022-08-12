@@ -9,6 +9,7 @@ public class GameScreenController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _score, _healthCount;
     [SerializeField] private Animator _animator;
 
+    private int _scoreValue = 0;
     public Action OnScreenDestroy;
 
     private void Start()
@@ -23,7 +24,12 @@ public class GameScreenController : MonoBehaviour
 
     public void ChangePlayerScore(int currentScore)
     {
-        _score.text = currentScore.ToString();
+        _scoreValue += currentScore;
+
+        if (_scoreValue > PlayerPrefs.GetInt("BestScore"))
+            PlayerPrefs.SetInt("BestScore", _scoreValue);
+
+        _score.text = _scoreValue.ToString();
     }
 
     public void StartLoseAnimation()

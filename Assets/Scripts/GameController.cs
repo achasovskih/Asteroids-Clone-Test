@@ -37,6 +37,7 @@ public class GameController : MonoBehaviour
         _gameScreenObject = _viewModel.SetScreen(_gameScreenPrefab, _targetCanvas.transform).GetComponent<GameScreenController>();
         _gameScreenObject.transform.SetAsFirstSibling();
         _gameScreenObject.ChangePlayerHealth(_playerModel.maxPlayerHp);
+        _enemySpawner.GameScreenController = _gameScreenObject;
 
         _gameScreenObject.OnScreenDestroy += Lose;
         _startScreenObject.OnDestroyStart -= SetGameScreen;
@@ -46,7 +47,7 @@ public class GameController : MonoBehaviour
     {
         _spawnedPlayer = _playerModel.SpawnPlayer(transform);
         _spawnedPlayer.GetComponent<PlayerModel>().health = _playerModel.maxPlayerHp;
-        _enemySpawner.player = _spawnedPlayer;
+        _enemySpawner.Player = _spawnedPlayer;
         _spawnedPlayer.GetComponent<PlayerModel>().OnGetDamage += _gameScreenObject.ChangePlayerHealth;
         _spawnedPlayer.GetComponent<PlayerModel>().OnDeath += _gameScreenObject.StartLoseAnimation;
     }

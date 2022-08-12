@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -10,7 +11,10 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private GameObject[] _spaceships;
     [SerializeField] private GameObject[] _asteroids;
 
-    public GameObject player;
+    private List<BaseEnemy> _spawnedEnemies;
+
+    public GameScreenController GameScreenController;
+    public GameObject Player;
 
     public void StartEnemySpawn()
     {
@@ -19,24 +23,28 @@ public class EnemySpawner : MonoBehaviour
 
     private IEnumerator EnemySpawnCoroutine()
     {
+        _spawnedEnemies = new();
+
         while (true)
         {
             int spawnChance = Random.Range(0, 11);
 
             if (spawnChance < 7)
-                CreateEnemy(_asteroids, new Asteroid());
+                _spawnedEnemies.Add(CreateEnemy(_asteroids, new Asteroid()));
 
             else
-                CreateEnemy(_spaceships, new Spaceship());
+                _spawnedEnemies.Add(CreateEnemy(_spaceships, new Spaceship()));
 
-            yield return new WaitForSeconds(Random.Range(5, 10));
+            yield return new WaitForSeconds(Random.Range(2, 7));
         }
     }
 
-    private void CreateEnemy(GameObject[] pool, BaseEnemy enemyType)
+    private BaseEnemy CreateEnemy(GameObject[] pool, BaseEnemy enemyType)
     {
         enemyType = Instantiate(pool[Random.Range(0, pool.Length)],
             _enemiesSpawnPoints[Random.Range(0, _enemiesSpawnPoints.Length)]).GetComponent<BaseEnemy>();
-        enemyType.player = player;
+        enemyType.player = Player;
+        enemyType.GameScreenController = GameScreenController;
+        return enemyType;
     }
 }

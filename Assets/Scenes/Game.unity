@@ -298,7 +298,8 @@ MonoBehaviour:
   - {fileID: 8797350629357707539, guid: f6f8b1edf8635244eb2bd07fa4bc6198, type: 3}
   _asteroids:
   - {fileID: 801699419121432072, guid: 73f05dde777a70647b5a6653c4668860, type: 3}
-  player: {fileID: 0}
+  GameScreenController: {fileID: 0}
+  Player: {fileID: 0}
 --- !u!1 &248208888
 GameObject:
   m_ObjectHideFlags: 0

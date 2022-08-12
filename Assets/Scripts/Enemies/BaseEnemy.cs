@@ -1,12 +1,21 @@
 using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public abstract class BaseEnemy : MonoBehaviour
 {
     public GameObject player;
+    public GameScreenController GameScreenController;
+
     protected float _speed;
     protected float _lifeTime;
+
+    public Action<int> OnGetDamage;
+
+    protected virtual void Start()
+    {
+        OnGetDamage += GameScreenController.ChangePlayerScore;
+    }
 
     protected void FollowPlayer() 
     {
@@ -39,5 +48,4 @@ public abstract class BaseEnemy : MonoBehaviour
     }
 
     protected abstract void GetDamage();
-
 }
