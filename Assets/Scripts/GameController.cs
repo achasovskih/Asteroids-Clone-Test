@@ -36,7 +36,6 @@ public class GameController : MonoBehaviour
     {
         _gameScreenObject = _viewModel.SetScreen(_gameScreenPrefab, _targetCanvas.transform).GetComponent<GameScreenController>();
         _gameScreenObject.transform.SetAsFirstSibling();
-        Debug.Log(_playerModel.gameObject.name);
         _gameScreenObject.ChangePlayerHealth(_playerModel.maxPlayerHp);
 
         _gameScreenObject.OnScreenDestroy += Lose;
