@@ -30,5 +30,14 @@ public abstract class BaseEnemy : MonoBehaviour
             player.GetComponent<PlayerModel>().GetDamage(1);
             Destroy(gameObject);
         }
+
+        if (collision.gameObject.tag == "Bullet")
+        {
+            Destroy(collision.gameObject);
+            GetDamage();
+        }
     }
+
+    protected abstract void GetDamage();
+
 }

@@ -21,4 +21,9 @@ public class Spaceship : BaseEnemy
     {
         base.OnTriggerEnter2D(collision);
     }
+
+    protected override void GetDamage()
+    {
+        Destroy(gameObject);
+    }
 }
