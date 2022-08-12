@@ -6,10 +6,9 @@ using UnityEngine;
 public class PlayerInputHandler : MonoBehaviour
 {
     [SerializeField] private ShootController _shootController;
-    [SerializeField] private float _turnSpeed = 0.1f, _moveSpeed = 0.5f, _turnDirection = 0f; 
+    [SerializeField] private float _turnSpeed = 0.1f, _moveSpeed = 0.5f, _turnDirection = 0f, _moveDirection; 
 
     private Rigidbody2D _rigidBody;
-    private bool _isMoving;
 
     void Awake()
     {
@@ -18,7 +17,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void Update()
     {
-        _isMoving = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
+        _moveDirection = Input.GetAxis("Vertical");
 
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
             _turnDirection = 1f;
@@ -36,9 +35,9 @@ public class PlayerInputHandler : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (_isMoving)
+        if (_moveDirection != 0)
         {
-            _rigidBody.AddForce(this.transform.up * _moveSpeed);
+            _rigidBody.AddForce(transform.up * _moveSpeed * _moveDirection);
         }
 
         if (_turnDirection != 0f)
