@@ -5,8 +5,10 @@ using UnityEngine;
 public class Spaceship : BaseEnemy
 {
     private int _spaceShipPoints = 100;
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
+
         _speed = 3f;
         _lifeTime = 15f;
 
