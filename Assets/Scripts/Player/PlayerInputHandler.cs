@@ -18,13 +18,7 @@ public class PlayerInputHandler : MonoBehaviour
     private void Update()
     {
         _moveDirection = Input.GetAxis("Vertical");
-
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-            _turnDirection = 1f;
-        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-            _turnDirection = -1f;
-        else
-            _turnDirection = 0f;
+        _turnDirection = Input.GetAxis("Horizontal");
 
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
@@ -42,7 +36,7 @@ public class PlayerInputHandler : MonoBehaviour
 
         if (_turnDirection != 0f)
         {
-            _rigidBody.AddTorque(_turnDirection * _turnSpeed);
+            _rigidBody.AddTorque(-_turnDirection * _turnSpeed);
         }
     }
 }
