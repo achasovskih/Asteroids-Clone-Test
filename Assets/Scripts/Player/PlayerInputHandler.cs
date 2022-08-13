@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerInputHandler : MonoBehaviour
 {
     [SerializeField] private ShootController _shootController;
-    [SerializeField] private float _turnSpeed = 0.1f, _moveSpeed = 0.5f, _turnDirection = 0f, _moveDirection; 
+    private float _turnSpeed = 0.5f, _moveSpeed = 6f, _turnDirection = 0f, _moveDirection;
 
     private Rigidbody2D _rigidBody;
 
