@@ -6,41 +6,19 @@ using UnityEngine;
 /// <summary>
 /// Класс, отвечающий за основные функции игрока
 /// </summary>
-public class PlayerController : PlayerModel
+public class PlayerController : MonoBehaviour
 {
-    public override GameObject SpawnPlayer(Transform parent)
+    [SerializeField] private GameObject _playerPrefab;
+    public PlayerModel SpawnedPlayer;
+    public GameScreenController GameScreen;
+
+    public void SpawnPlayer()
     {
-        return Instantiate(playerObject, parent);
+        SpawnedPlayer = Instantiate(_playerPrefab).GetComponent<PlayerModel>();
+        GameScreen.ChangePlayerHealth(SpawnedPlayer.PlayerHp);
+
+        SpawnedPlayer.OnGetDamage += GameScreen.ChangePlayerHealth;
+        SpawnedPlayer.OnDeath += GameScreen.StartLoseAnimation;
+
     }
-
-    public override void GetDamage(int damage)
-    {
-        int currentHealth = playerObject.GetComponent<PlayerModel>().health -= damage;
-
-        if (currentHealth < 0)
-        {
-            OnDeath?.Invoke();
-            Destroy(playerObject);
-        }
-        else
-            OnGetDamage?.Invoke(currentHealth);
-    }
-
-}
-
-public abstract class PlayerModel : MonoBehaviour
-{
-    public int maxPlayerHp = 3;
-
-    public int health = 0;
-
-    public GameObject playerObject;
-
-    public Action<int> OnGetDamage;
-
-    public Action OnDeath;
-
-    public abstract GameObject SpawnPlayer(Transform parent);
-
-    public abstract void GetDamage(int damage);
 }

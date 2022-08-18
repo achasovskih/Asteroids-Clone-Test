@@ -38,7 +38,7 @@ public class EnemySpawner : MonoBehaviour
             else
                 _spawnedEnemies.Add(CreateEnemy(_spaceships, new Spaceship()));
 
-            yield return new WaitForSeconds(Random.Range(2, 7));
+            yield return new WaitForSeconds(Random.Range(5, 10));
         }
     }
 

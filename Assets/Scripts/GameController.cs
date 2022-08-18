@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 /// <summary>
 ///  ласс, отвечающий за логику игры и внедр€щий зависимости обособленным друг от друга компонентам
 /// </summary>
@@ -13,10 +14,10 @@ public class GameController : MonoBehaviour
 
     [Header("Reference scripts")]
     [SerializeField] private ViewModel _viewModel;
-    [SerializeField] private PlayerModel _playerModel;
+    [SerializeField] private PlayerController _playerController;
     [SerializeField] private EnemySpawner _enemySpawner;
 
-    [SerializeField] private GameObject _spawnedPlayer;
+    [SerializeField] private PlayerModel _player;
 
     [Header("Canvas")]
     [SerializeField] private Canvas _targetCanvas;
@@ -39,7 +40,6 @@ public class GameController : MonoBehaviour
     {
         _gameScreenObject = _viewModel.SetScreen(_gameScreenPrefab, _targetCanvas.transform).GetComponent<GameScreenController>();
         _gameScreenObject.transform.SetAsFirstSibling();
-        _gameScreenObject.ChangePlayerHealth(_playerModel.maxPlayerHp);
         _enemySpawner.GameScreenController = _gameScreenObject;
 
         _gameScreenObject.OnScreenDestroy += Lose;
@@ -48,11 +48,10 @@ public class GameController : MonoBehaviour
 
     private void SetUpPlayer()
     {
-        _spawnedPlayer = _playerModel.SpawnPlayer(transform);
-        _spawnedPlayer.GetComponent<PlayerModel>().health = _playerModel.maxPlayerHp;
-        _enemySpawner.Player = _spawnedPlayer;
-        _spawnedPlayer.GetComponent<PlayerModel>().OnGetDamage += _gameScreenObject.ChangePlayerHealth;
-        _spawnedPlayer.GetComponent<PlayerModel>().OnDeath += _gameScreenObject.StartLoseAnimation;
+        _playerController.GameScreen = _gameScreenObject;
+        _playerController.SpawnPlayer();
+        _enemySpawner.Player = _playerController.SpawnedPlayer.gameObject;
+
     }
 
     private void StartScreenSubsribingMethod()
